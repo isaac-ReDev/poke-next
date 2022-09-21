@@ -1,0 +1,29 @@
+*{
+    font-family:Helvetica;
+    padding: 0%;
+    margin: 0%;
+    box-sizing: border-box;
+}
+
+.header{
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    width: 100%;
+}
+
+.infoHeader{
+    width: 50vw;
+    
+}
+
+.main-container{
+    width: 100%;
+    min-height: 70vh;
+}
+
+body, html{
+    background-color: rgb(144, 144, 239);
+
+}
+
