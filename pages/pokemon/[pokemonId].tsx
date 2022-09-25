@@ -1,4 +1,5 @@
 import Image from "next/image";
+import styles from '../../styles/pokemon.module.css'
 
 export const getStaticPaths = async() => {
     let maxPokemons = 91;
@@ -34,22 +35,38 @@ export const getStaticProps = async (context:any) => {
 export default function pokemon({pokemon}:any ){
 
     return( 
-        <>
-            <p>{pokemon.name}</p>
-            <details>
-                <summary>Abilidades</summary>
-                <p>{pokemon.abilities[0].ability.name}</p>
-                <p>{pokemon.abilities[1].ability.name}</p>
-            </details>
-            <details>
-                <summary>Tipo</summary>
-                <p>{pokemon.types[0].type.name}</p>
-                <p>{pokemon.types[1].type.name}</p>
-            </details>
+        <div className={styles.pokemon_container}>
+            <h1>{pokemon.name}</h1>
             <Image src={`https://cdn.traction.one/pokedex/pokemon/${pokemon.id}.png`} 
-                width="100" 
-                height="100" 
+                width="200" 
+                height="200" 
                 alt="pokemon"/>
-        </>
+            <div className={styles.types_container}>
+                {
+                    pokemon.types.map((pokeType:string | any) => {
+                        return <span key={pokemon.id}
+                            className={`${styles.type} ${styles['type_' + pokeType.type.name]}`}>{pokeType.type.name}</span>
+                    })
+                }
+            </div>
+            <div className={styles.abilities_container}>
+                {
+                    pokemon.abilities.map((pokeAbility:string | any) => {
+                        return <span key={pokemon.id} className={styles.type} >{pokeAbility.ability.name}</span>
+                    })
+                }
+            </div>
+            <div className={styles.data_container}>
+                <div className={styles.data_height}>
+                    <h4>Altura</h4>
+                    <p>{pokemon.height * 10} /cm</p>
+                </div>
+                <div className={styles.data_weight}>
+                    <h4>Peso</h4>
+                    <p>{pokemon.weight / 10} /kg</p>
+                </div>
+            </div>
+            
+        </div>
     )
 }
